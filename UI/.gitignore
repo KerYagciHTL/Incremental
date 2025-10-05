@@ -385,10 +385,12 @@ FodyWeavers.xsd
 *.cab
 *.msi
 *.msix
-*.msm
+*.msmS
 *.msp
 
 # JetBrains Rider
 *.sln.iml
 
-# End of https://www.toptal.com/developers/gitignore/api/csharp
+/bin
+/obj
+/.idea
