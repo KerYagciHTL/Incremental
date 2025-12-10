@@ -1,5 +1,0 @@
-C:\Users\nicoh\Desktop\Incremental\Incremental\obj\Debug\net8.0\Incremental.csproj.AssemblyReference.cache
-C:\Users\nicoh\Desktop\Incremental\Incremental\obj\Debug\net8.0\Incremental.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\nicoh\Desktop\Incremental\Incremental\obj\Debug\net8.0\Incremental.AssemblyInfoInputs.cache
-C:\Users\nicoh\Desktop\Incremental\Incremental\obj\Debug\net8.0\Incremental.AssemblyInfo.cs
-C:\Users\nicoh\Desktop\Incremental\Incremental\obj\Debug\net8.0\Incremental.csproj.CoreCompileInputs.cache
