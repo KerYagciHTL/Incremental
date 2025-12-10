@@ -1,33 +1,62 @@
 # Incremental Game
 
-A modern incremental/idle game built with Avalonia UI and .NET 8, featuring a custom big number system and passive income mechanics.
+🚧 **Work In Progress - Under Active Development** 🚧
+
+A modern incremental/idle game built with Avalonia UI and .NET 8, featuring a custom big number system, passive income mechanics, and a beautiful GitHub Dark-themed interface.
 
 ## 🎮 Features
 
-- **Passive Income System**: Automatically earn money every second without any interaction
-- **BigNum System**: Custom number formatting supporting suffixes (K, M, B, T, Qd, Qn, Sx, Sp, Oc, No, De, and beyond)
-- **Upgrade System**: Purchase upgrades to boost your income
-  - **2× Cash**: Doubles your cash multiplier
-  - **+1 Base Cash**: Increases base cash per tick
-- **Clean UI**: Modern dark-themed interface built with Avalonia
-- **Fullscreen Mode**: Immersive gaming experience
+### Currently Implemented ✅
+
+- **Passive Income System**: Automatically earn money every second - no clicking required!
+- **Custom BigNum System**: Advanced number formatting with suffix support (0, 1, 2... 999, 1.00 K, 999.99 K, 1.00 M, etc.)
+- **Two Core Upgrades**:
+  - **+1 Base Cash** (Starting cost: 10) - Increases base cash earned per second by 1
+  - **2× Multiplier** (Starting cost: 100) - Doubles your cash multiplier
+- **Dynamic Cost Colors**: 
+  - 🟢 **Green** when you can afford an upgrade
+  - 🔴 **Red** when you cannot afford it (updates in real-time!)
+- **Modern XAML UI**: Clean, responsive interface with GitHub Dark theme
+- **Tab Navigation**: Switch between Game and Settings pages
+- **Statistics Panel**: Real-time display of:
+  - Base Cash per second
+  - Current multiplier
+  - Total income per second
+- **Settings Page**: 
+  - Game information
+  - Controls guide
+  - Easy exit button (no Alt+F4 needed!)
+- **MVVM Architecture**: Clean separation between UI and game logic
+
+### Planned Features 🚀
+
+- More upgrade types
+- Save/Load system
+- Achievements
+- Prestige system
+- Sound effects
+- Animations
+- Extended suffix support beyond current implementation
 
 ## 🏗️ Project Structure
 
 ```
 Incremental/
-├── BigNum/              # Custom big number library
-│   ├── BigNum.cs       # Main BigNum class with arithmetic operators
-│   └── Suffix.cs       # Enum for number suffixes (K, M, B, T, etc.)
-├── Incremental/        # Core game logic library
-│   └── Money.cs        # Money management system
-├── UI/                 # Avalonia UI application
-│   ├── Program.cs      # Entry point
-│   ├── MainWindow.cs   # Main game window
-│   └── Stackdisplay.cs # Game UI components
-└── Incremental.Tests/  # Unit tests
-    ├── BigNumTests.cs  # BigNum calculation tests
-    └── MoneyTests.cs   # Money system tests
+├── BigNum/                 # Custom big number library
+│   ├── BigNum.cs          # Main BigNum class with arithmetic operators
+│   └── Suffix.cs          # Enum for number suffixes (K, M, B, T, Qd, Qn, etc.)
+├── Incremental/           # Core game logic library
+│   ├── GameLogic.cs       # Core game mechanics and state management
+│   ├── GameViewModel.cs   # ViewModel for UI binding (MVVM pattern)
+│   └── Money.cs           # Money management system (legacy)
+├── UI/                    # Avalonia UI application
+│   ├── Program.cs         # Application entry point
+│   ├── MainWindow.axaml   # XAML UI definition (Game + Settings tabs)
+│   ├── MainWindow.cs      # Code-behind with ViewModel integration
+│   └── UI.csproj          # Project configuration
+└── Incremental.Tests/     # Unit tests (25 tests, all passing)
+    ├── BigNumTests.cs     # BigNum calculation tests
+    └── MoneyTests.cs      # Money system tests
 ```
 
 ## 🚀 Getting Started
@@ -62,26 +91,40 @@ Run the game using:
 dotnet run --project UI/UI.csproj
 ```
 
-The game will launch in fullscreen mode.
+The game will open in a resizable window with tab navigation (Game and Settings).
 
 ## 🎯 How to Play
 
 ### Basic Mechanics
 
-- **Passive Income**: The game automatically generates 1 money per second
-- **Manual Income**: Press `C` to manually gain cash
-- **Upgrades**: Click on upgrade cards to purchase them and boost your income
+- **Passive Income**: Cash is automatically generated every second based on your base cash and multiplier
+- **Upgrades**: Click on upgrade buttons when they're enabled (green cost) to purchase them
+- **Tab Navigation**: Switch between the **🎮 Game** tab and **⚙️ Settings** tab
 
-### Keyboard Controls
+### Understanding the Interface
 
-- `C` - Manually gain cash
-- `ESC` - Exit fullscreen
+#### Game Tab
+- **Cash Display**: Shows your current money with automatic suffix formatting
+- **Statistics Panel**: 
+  - Base Cash/sec: How much base cash you earn per second
+  - Multiplier: Your current cash multiplier
+  - Total Income/sec: Base × Multiplier (your actual income rate)
+- **Upgrades Panel**: 
+  - Upgrade cards show in green when affordable, red when too expensive
+  - Click to purchase when you have enough cash
+  - Costs scale up after each purchase
+
+#### Settings Tab
+- View game information (version, creator, year)
+- Read controls guide
+- **Exit Game** button - Cleanly close the application
 
 ### Upgrade Strategy
 
-1. Start by saving up for the **+1 Base Cash** upgrade to increase your passive income rate
-2. Once you have steady income, purchase **2× Cash** to multiply your earnings
-3. Balance between both upgrades for optimal growth
+1. Start by saving up for the **+1 Base Cash** upgrade (10 cash) to increase your passive income rate
+2. Once you have steady income, purchase **2× Multiplier** (100 cash) to multiply your earnings
+3. Balance between both upgrades for exponential growth
+4. Watch the cost colors: Green = affordable, Red = keep saving!
 
 ## 🧪 Testing
 
@@ -148,11 +191,13 @@ var (diff, success) = c - d;        // 300K
 ## 🔧 Technical Details
 
 - **Framework**: .NET 8.0
-- **UI Framework**: Avalonia 11.x
+- **UI Framework**: Avalonia 11.x (XAML-based)
 - **Language**: C# 12
-- **Architecture**: Multi-project solution with separation of concerns
-- **Timer**: Non-blocking DispatcherTimer for passive income
-- **Testing**: xUnit with 25+ unit tests
+- **Architecture**: MVVM-inspired pattern with ViewModel layer
+- **Design Theme**: GitHub Dark color scheme
+- **Passive Income**: DispatcherTimer with 1-second intervals
+- **Testing**: xUnit with 25 unit tests (all passing)
+- **Number System**: Custom BigNum implementation with suffix support
 
 ## 📝 License & Copyright
 
@@ -185,6 +230,8 @@ This is a personal project and is **not accepting contributions**.
 ---
 
 **Made with ❤️ by Nico | December 2025**
+
+**All credits and ownership belong exclusively to Nico - Forever and Always**
 
 **All credits and ownership belong exclusively to Nico - Forever and Always**
 
