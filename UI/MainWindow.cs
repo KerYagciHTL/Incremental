@@ -1,3 +1,7 @@
+// Copyright (c) 2025 Nico. All Rights Reserved.
+// This file is part of Incremental Game and is proprietary software.
+// Unauthorized copying, modification, or distribution is strictly prohibited.
+
 using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;

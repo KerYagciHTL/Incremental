@@ -1,0 +1,173 @@
+# Copyright (c) 2025 Nico. All Rights Reserved.
+
+## .NET Build Outputs
+bin/
+obj/
+out/
+
+## Build Results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rm/
+[Aa]rm64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.iml
+*.swp
+*~
+.DS_Store
+
+## ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## Test Results
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+## NuGet Packages
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Cache Files
+*.cache
+*.orig
+*.log
+*.tmp
+*.temp
+
+## NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+## Rider
+.idea/
+*.sln.iml
+
+## User-specific files
+*.rsuser
+*.sln.DotSettings.user
+
+## Mono Auto Generated Files
+mono_crash.*
+
+## Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+## Folder config file
+Desktop.ini
+
+## Recycle Bin
+$RECYCLE.BIN/
+
+## Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## Linux
+*~
+.directory
+.Trash-*
+
+## Backup files
+*.bak
+*.backup
+*~
+
+## Publish Profiles
+PublishProfiles/
+*.pubxml
+*.publishsettings
+
+## Azure
+*.azurePubxml
+
+## StyleCop
+StyleCopReport.xml
+
+## Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp_proj
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+## ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+## Avalonia Previewer
+Avalonia.NameGenerator/
+
+## JetBrains Rider
+.idea/
+.idea_modules/
+
+## Local History
+.localhistory/
+
+## Temporary files
+*.tmp
+*.log
+
+## Keep Important Files
+!README.md
+!LICENSE
+!global.json
+!*.sln
+!*.csproj
+!*.cs
+!*.xaml
+!*.axaml
+!.gitignore
+

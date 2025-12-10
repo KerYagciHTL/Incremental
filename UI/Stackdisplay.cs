@@ -1,3 +1,7 @@
+// Copyright (c) 2025 Nico. All Rights Reserved.
+// This file is part of Incremental Game and is proprietary software.
+// Unauthorized copying, modification, or distribution is strictly prohibited.
+
 using System;
 using System.Globalization;
 using Avalonia;
@@ -8,13 +12,14 @@ using Avalonia.Input;
 using Avalonia.VisualTree;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity; // for RoutedEventArgs
+using Avalonia.Threading; // for DispatcherTimer
 
 namespace UI;
 
 public class StackDisplay : UserControl
 {
     // Spielwerte
-    private double _cash = 0;
+    private double _cash;
     private double _baseCash = 1;
     private double _multiplier = 1;
 
@@ -24,6 +29,9 @@ public class StackDisplay : UserControl
     private Button _btnPlus1 = null!;
     private TextBlock _x2CostText = null!;
     private TextBlock _plus1CostText = null!;
+    
+    // Timer für passives Einkommen
+    private readonly DispatcherTimer _incomeTimer;
 
     // Upgrade-Kosten (Beispielwerte)
     private double _x2Cost = 1_000;     // 0,00 M Anzeige = €0,00 M bis <1 Mio
@@ -31,6 +39,14 @@ public class StackDisplay : UserControl
 
     public StackDisplay()
     {
+        // Timer für passives Einkommen (1 Geld pro Sekunde)
+        _incomeTimer = new DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(1)
+        };
+        _incomeTimer.Tick += (_, _) => GainCash();
+        _incomeTimer.Start();
+
         // Hauptcontainer
         var root = new StackPanel
         {
@@ -134,13 +150,13 @@ public class StackDisplay : UserControl
             FontSize = 26,
             Foreground = Brushes.White,
             HorizontalAlignment = HorizontalAlignment.Center,
-            Effect = new DropShadowEffect
-            {
-                Color = Colors.Black,
-                BlurRadius = 0,
-                Opacity = 1,
-                Effect = new DropShadowEffect { Color = Colors.Black, Opacity = 1, BlurRadius = 0, OffsetX = 1, OffsetY = 1 }
-
+            Effect = new DropShadowEffect 
+            { 
+                Color = Colors.Black, 
+                Opacity = 1, 
+                BlurRadius = 0, 
+                OffsetX = 1, 
+                OffsetY = 1 
             }
         };
         upgradesStack.Children.Add(upgradesTitle);
@@ -218,7 +234,7 @@ public class StackDisplay : UserControl
         _cashBox.Text = FormatCashM(_cash);
     }
 
-    private void TryBuyX2(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void TryBuyX2(object? sender, RoutedEventArgs e)
     {
         if (_cash < _x2Cost) return;
         _cash -= _x2Cost;
@@ -228,7 +244,7 @@ public class StackDisplay : UserControl
         UpdateCosts();
     }
 
-    private void TryBuyPlus1(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    private void TryBuyPlus1(object? sender, RoutedEventArgs e)
     {
         if (_cash < _plus1Cost) return;
         _cash -= _plus1Cost;
@@ -253,7 +269,7 @@ public class StackDisplay : UserControl
         return string.Create(culture, $"{millions:C2} M");
     }
 
-    private Button CreateUpgradeCard(string title, string desc, out TextBlock costBinding, Action<object?, RoutedEventArgs> onClick)
+    private Button CreateUpgradeCard(string title, string desc, out TextBlock costBinding, EventHandler<RoutedEventArgs> onClick)
     {
         var card = new Border
         {
@@ -275,13 +291,13 @@ public class StackDisplay : UserControl
             FontWeight = FontWeight.Bold,
             FontSize = 22,
             Foreground = Brushes.White,
-            Effect = new DropShadowEffect
-            {
-                Color = Colors.Black,
-                BlurRadius = 0,
-                Opacity = 1,
-                new DropShadowEffect { Color = Colors.Black, Opacity = 1, Blur = 0, OffsetX = 1, OffsetY = 1 }
-
+            Effect = new DropShadowEffect 
+            { 
+                Color = Colors.Black, 
+                Opacity = 1, 
+                BlurRadius = 0, 
+                OffsetX = 1, 
+                OffsetY = 1 
             }
         };
 
@@ -292,13 +308,13 @@ public class StackDisplay : UserControl
             FontSize = 14,
             Foreground = Brushes.White,
             TextWrapping = TextWrapping.Wrap,
-            Effect = new DropShadowEffect
-            {
-                Color = Colors.Black,
-                BlurRadius = 0,
-                Opacity = 1,
-                new DropShadowEffect { Color = Colors.Black, Opacity = 1, Blur = 0, OffsetX = 1, OffsetY = 1 }
-
+            Effect = new DropShadowEffect 
+            { 
+                Color = Colors.Black, 
+                Opacity = 1, 
+                BlurRadius = 0, 
+                OffsetX = 1, 
+                OffsetY = 1 
             }
         };
 
@@ -309,13 +325,13 @@ public class StackDisplay : UserControl
             FontSize = 16,
             FontWeight = FontWeight.SemiBold,
             Foreground = Brushes.White,
-            Effect = new DropShadowEffect
-            {
-                Color = Colors.Black,
-                BlurRadius = 0,
-                Opacity = 1,
-                new DropShadowEffect { Color = Colors.Black, Opacity = 1, Blur = 0, OffsetX = 1, OffsetY = 1 }
-
+            Effect = new DropShadowEffect 
+            { 
+                Color = Colors.Black, 
+                Opacity = 1, 
+                BlurRadius = 0, 
+                OffsetX = 1, 
+                OffsetY = 1 
             }
         };
 
@@ -328,7 +344,7 @@ public class StackDisplay : UserControl
             Height = 38,
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
-        btn.Click += new Avalonia.Interactivity.RoutedEventHandler(onClick);
+        btn.Click += onClick;
 
         stack.Children.Add(titleBlock);
         stack.Children.Add(descBlock);
@@ -345,7 +361,7 @@ public class StackDisplay : UserControl
             Padding = new Thickness(0)
         };
         // Outer Button als gesamter klickbarer Bereich
-        container.Click += new Avalonia.Interactivity.RoutedEventHandler(onClick);
+        container.Click += onClick;
 
         return container;
     }

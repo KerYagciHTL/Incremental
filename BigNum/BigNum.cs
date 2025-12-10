@@ -1,4 +1,8 @@
-﻿using System.Globalization;
+﻿// Copyright (c) 2025 Nico. All Rights Reserved.
+// This file is part of Incremental Game and is proprietary software.
+// Unauthorized copying, modification, or distribution is strictly prohibited.
+
+using System.Globalization;
 
 namespace BigNum;
 
@@ -37,43 +41,84 @@ public class BigNum : IEquatable<BigNum>
 
     public static BigNum operator +(BigNum a, BigNum b)
     {
-        //TODO check increment again bc what if suffix of b is way higher (maybe increment suffix of a until b suffix is none?)
-        var amount = a.Number + b.Number;
-        while (amount >= 1000)
+        // Normalize to the higher suffix
+        var resultSuffix = a.Suffix > b.Suffix ? a.Suffix : b.Suffix;
+        var aValue = a.Number;
+        var bValue = b.Number;
+        
+        // Convert a to result suffix
+        var aSuffixCopy = a.Suffix;
+        while (aSuffixCopy < resultSuffix)
+        {
+            aValue /= 1000;
+            aSuffixCopy++;
+        }
+        
+        // Convert b to result suffix
+        var bSuffixCopy = b.Suffix;
+        while (bSuffixCopy < resultSuffix)
+        {
+            bValue /= 1000;
+            bSuffixCopy++;
+        }
+        
+        var amount = aValue + bValue;
+        
+        // Handle overflow to next suffix
+        while (amount >= 1000 && resultSuffix < Suffix.Infinite)
         {
             amount /= 1000;
-            a.Suffix++;
+            resultSuffix++;
         }
 
-        return new BigNum(amount, a.Suffix);
+        return new BigNum(amount, resultSuffix);
     }
 
     public static (BigNum, bool) operator -(BigNum a, BigNum b)
     {
-        //TODO fix decrement between suffix
-        var worked = true;
-        double amount = 0;
-        if (a.Suffix < b.Suffix || a.Suffix == b.Suffix && a.Number < b.Number)
+        // Check if a < b (can't subtract)
+        if (a.Suffix < b.Suffix || (a.Suffix == b.Suffix && a.Number < b.Number))
         {
-            worked = false;
+            return (new BigNum(0, Suffix.None), false);
         }
-        else
+        
+        // Normalize to the higher suffix
+        var resultSuffix = a.Suffix > b.Suffix ? a.Suffix : b.Suffix;
+        var aValue = a.Number;
+        var bValue = b.Number;
+        
+        // Convert a to result suffix
+        var aSuffixCopy = a.Suffix;
+        while (aSuffixCopy < resultSuffix)
         {
-            amount = a.Number - b.Number;
-            if (amount < 0) amount = 1000 - amount;
-            if (amount == 0)
-            {
-                amount = 0.001;
-            }
-
-            while (amount < 1 && a.Suffix != Suffix.None)
-            {
-                amount *= 1000;
-                a.Suffix--;
-            }
+            aValue /= 1000;
+            aSuffixCopy++;
+        }
+        
+        // Convert b to result suffix
+        var bSuffixCopy = b.Suffix;
+        while (bSuffixCopy < resultSuffix)
+        {
+            bValue /= 1000;
+            bSuffixCopy++;
+        }
+        
+        var amount = aValue - bValue;
+        
+        // If result is exactly zero, keep the suffix
+        if (Math.Abs(amount) < 0.0000001)
+        {
+            return (new BigNum(0, resultSuffix), true);
+        }
+        
+        // Normalize result - reduce suffix if number is too small
+        while (amount < 1 && amount > 0 && resultSuffix > Suffix.None)
+        {
+            amount *= 1000;
+            resultSuffix--;
         }
 
-        return (new BigNum(amount, a.Suffix), worked);
+        return (new BigNum(amount, resultSuffix), true);
     }
 
     #region Equals
