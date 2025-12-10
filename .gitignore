@@ -159,6 +159,7 @@ Avalonia.NameGenerator/
 ## Temporary files
 *.tmp
 *.log
+*.dll
 
 ## Keep Important Files
 !README.md
