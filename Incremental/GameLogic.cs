@@ -9,14 +9,21 @@ namespace Incremental;
 
 public class GameLogic
 {
-    // Game state
+    // Game state 
     private double _cash;
     private double _baseCash = 1;
     private double _multiplier = 1;
+    private double _rebirth = 0;
 
     // Upgrade costs
     private double _x2Cost = 100;
     private double _plus1Cost = 10;
+    private static double _rebirthCost = 1000;
+
+    // Cost scaling
+    private double _x2CostScaling = 2;
+    private double _plus1CostScaling = 1.2;
+    private double _rebirthCostScaling = Math.Pow(_rebirthCost, 2);
 
 
     // Events for UI updates
@@ -29,6 +36,8 @@ public class GameLogic
     public double Multiplier => _multiplier;
     public double X2Cost => _x2Cost;
     public double Plus1Cost => _plus1Cost;
+    public double X2CostScaling => _x2CostScaling;
+    public double Plus1CostScaling => _plus1CostScaling;
 
     public GameLogic()
     {
@@ -54,7 +63,7 @@ public class GameLogic
 
         _cash -= _x2Cost;
         _multiplier *= 2;
-        _x2Cost *= 1.5;
+        _x2Cost *= _x2CostScaling;
 
         OnCashChanged();
         OnUpgradeCostsChanged();
@@ -71,7 +80,7 @@ public class GameLogic
 
         _cash -= _plus1Cost;
         _baseCash += 1;
-        _plus1Cost *= 2.5;
+        _plus1Cost *= _plus1CostScaling;
 
         OnCashChanged();
         OnUpgradeCostsChanged();
@@ -97,7 +106,9 @@ public class GameLogic
             suffixIndex++;
         }
 
-        return suffixIndex == 0 ? displayValue.ToString("0") : $"{displayValue:0.00} {SuffixConstants.GetSuffix(suffixIndex)}";
+        return suffixIndex == 0
+            ? displayValue.ToString("0")
+            : $"{displayValue:0.00} {SuffixConstants.GetSuffix(suffixIndex)}";
     }
 
     protected virtual void OnCashChanged()

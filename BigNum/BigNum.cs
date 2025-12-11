@@ -27,23 +27,24 @@ public class BigNum : IEquatable<BigNum>
     public static BigNum ToBigNum(string number)
     {
         var parts = number.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        
-        if (parts.Length == 1)
+
+        switch (parts.Length)
         {
-            // No suffix, just a number
-            var num = double.Parse(parts[0], CultureInfo.InvariantCulture);
-            return new BigNum(num, "");
-        }
-        else if (parts.Length == 2)
-        {
-            // Number with suffix
-            var num = double.Parse(parts[0], CultureInfo.InvariantCulture);
-            var suffix = parts[1];
-            return new BigNum(num, suffix);
-        }
-        else
-        {
-            throw new Exception("Invalid number");
+            case 1:
+            {
+                // No suffix, just a number
+                var num = double.Parse(parts[0], CultureInfo.InvariantCulture);
+                return new BigNum(num, "");
+            }
+            case 2:
+            {
+                // Number with suffix
+                var num = double.Parse(parts[0], CultureInfo.InvariantCulture);
+                var suffix = parts[1];
+                return new BigNum(num, suffix);
+            }
+            default:
+                throw new Exception("Invalid number");
         }
     }
 
@@ -59,7 +60,7 @@ public class BigNum : IEquatable<BigNum>
         // Get suffix indices
         int aIndex = SuffixConstants.GetSuffixIndex(a.Suffix);
         int bIndex = SuffixConstants.GetSuffixIndex(b.Suffix);
-        
+
         // Normalize to the higher suffix
         int resultIndex = Math.Max(aIndex, bIndex);
         var aValue = a.Number;
@@ -96,7 +97,7 @@ public class BigNum : IEquatable<BigNum>
         // Get suffix indices
         int aIndex = SuffixConstants.GetSuffixIndex(a.Suffix);
         int bIndex = SuffixConstants.GetSuffixIndex(b.Suffix);
-        
+
         // Check if a < b (can't subtract)
         if (aIndex < bIndex || (aIndex == bIndex && a.Number < b.Number))
         {
