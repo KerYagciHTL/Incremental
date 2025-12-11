@@ -16,7 +16,7 @@ public partial class MainWindow : Window
 {
     private readonly GameViewModel _viewModel;
     private readonly DispatcherTimer _incomeTimer;
-    
+
     private readonly TextBlock _cashDisplay;
     private readonly TextBlock _baseCashDisplay;
     private readonly TextBlock _multiplierDisplay;
@@ -32,18 +32,18 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        
+
         _viewModel = new GameViewModel();
         _viewModel.PropertyChanged += OnViewModelPropertyChanged;
-        
+
         _incomeTimer = new DispatcherTimer
         {
             Interval = TimeSpan.FromSeconds(1)
         };
-        
+
         _incomeTimer.Tick += OnTick;
         _incomeTimer.Start();
-        
+
         _cashDisplay = this.FindControl<TextBlock>("CashDisplay")!;
         _baseCashDisplay = this.FindControl<TextBlock>("BaseCashDisplay")!;
         _multiplierDisplay = this.FindControl<TextBlock>("MultiplierDisplay")!;
@@ -52,7 +52,7 @@ public partial class MainWindow : Window
         _x2CostDisplay = this.FindControl<TextBlock>("X2CostDisplay")!;
         _btnPlus1 = this.FindControl<Button>("BtnPlus1")!;
         _btnX2 = this.FindControl<Button>("BtnX2")!;
-        
+
         UpdateUi();
     }
 
@@ -60,7 +60,7 @@ public partial class MainWindow : Window
     {
         _viewModel.GainCash();
     }
-    
+
     private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
@@ -80,9 +80,9 @@ public partial class MainWindow : Window
     {
         _viewModel.PropertyChanged -= OnViewModelPropertyChanged;
         _incomeTimer.Tick -= OnTick;
-        
+
         _incomeTimer.Stop();
-        
+
         Close();
     }
 
@@ -99,14 +99,11 @@ public partial class MainWindow : Window
         _incomeDisplay.Text = _viewModel.IncomeDisplay;
         _plus1CostDisplay.Text = _viewModel.Plus1CostDisplay;
         _x2CostDisplay.Text = _viewModel.X2CostDisplay;
-        
+
         _btnPlus1.IsEnabled = _viewModel.CanAffordPlus1;
         _btnX2.IsEnabled = _viewModel.CanAffordX2;
-        
+
         _plus1CostDisplay.Foreground = _viewModel.CanAffordPlus1 ? AffordableColor : UnaffordableColor;
         _x2CostDisplay.Foreground = _viewModel.CanAffordX2 ? AffordableColor : UnaffordableColor;
     }
 }
-
-
-
