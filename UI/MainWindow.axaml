@@ -354,112 +354,114 @@
                         BorderBrush="#30363d"
                         BorderThickness="1"
                         VerticalAlignment="Top">
-                    <StackPanel Spacing="30" MaxWidth="600">
-                        <!-- Game Information -->
-                        <StackPanel Spacing="15">
-                            <TextBlock Text="📋 Game Information"
-                                       FontSize="24"
-                                       FontWeight="Bold"
-                                       Foreground="#ffffff" />
-                            <Separator Background="#21262d" Height="2" />
-                            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="12">
-                                <TextBlock Grid.Row="0" Grid.Column="0"
-                                           Text="Version:"
-                                           FontSize="18"
-                                           Foreground="#8b949e" />
-                                <TextBlock Grid.Row="0" Grid.Column="1"
-                                           Text="1.0.0"
-                                           FontSize="18"
+                    <ScrollViewer>
+                        <StackPanel Spacing="30" MaxWidth="600">
+                            <!-- Game Information -->
+                            <StackPanel Spacing="15">
+                                <TextBlock Text="📋 Game Information"
+                                           FontSize="24"
                                            FontWeight="Bold"
-                                           Foreground="#58a6ff" />
-
-                                <TextBlock Grid.Row="1" Grid.Column="0"
-                                           Text="Created by:"
-                                           FontSize="18"
-                                           Foreground="#8b949e" />
-                                <TextBlock Grid.Row="1" Grid.Column="1"
-                                           Text="Nico"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Foreground="#58a6ff" />
-
-                                <TextBlock Grid.Row="2" Grid.Column="0"
-                                           Text="Year:"
-                                           FontSize="18"
-                                           Foreground="#8b949e" />
-                                <TextBlock Grid.Row="2" Grid.Column="1"
-                                           Text="2025"
-                                           FontSize="18"
-                                           FontWeight="Bold"
-                                           Foreground="#58a6ff" />
-                            </Grid>
-                        </StackPanel>
-
-                        <!-- Controls -->
-                        <StackPanel Spacing="15">
-                            <TextBlock Text="🎮 Controls"
-                                       FontSize="24"
-                                       FontWeight="Bold"
-                                       Foreground="#ffffff" />
-                            <Separator Background="#21262d" Height="2" />
-                            <StackPanel Spacing="10">
-                                <Border Background="#0d1117"
-                                        CornerRadius="8"
-                                        Padding="15"
-                                        BorderBrush="#30363d"
-                                        BorderThickness="1">
-                                    <TextBlock TextWrapping="Wrap"
-                                               FontSize="16"
-                                               Foreground="#8b949e">
-                                        <Run Text="• Click on upgrade buttons to purchase them" FontWeight="SemiBold"
-                                             Foreground="#ffffff" />
-                                        <LineBreak />
-                                        <Run Text="• Cash is earned automatically every second" /><LineBreak />
-                                        <Run Text="• Switch between tabs to access different features" />
-                                    </TextBlock>
-                                </Border>
-                            </StackPanel>
-                        </StackPanel>
-
-                        <!-- Actions -->
-                        <StackPanel Spacing="15">
-                            <TextBlock Text="🔧 Actions"
-                                       FontSize="24"
-                                       FontWeight="Bold"
-                                       Foreground="#ffffff" />
-                            <Separator Background="#21262d" Height="2" />
-                            <Button Name="BtnExit"
-                                    Click="OnExitGame"
-                                    HorizontalAlignment="Stretch"
-                                    Background="#0d1117"
-                                    BorderBrush="#f85149"
-                                    BorderThickness="2"
-                                    CornerRadius="10"
-                                    Padding="20"
-                                    Cursor="Hand">
-                                <Button.Styles>
-                                    <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#f85149" />
-                                    </Style>
-                                    <Style Selector="Button:pointerover">
-                                        <Setter Property="BorderBrush" Value="#ff7b72" />
-                                    </Style>
-                                    <Style Selector="Button:pressed /template/ ContentPresenter">
-                                        <Setter Property="Background" Value="#da3633" />
-                                    </Style>
-                                </Button.Styles>
-                                <StackPanel Orientation="Horizontal" Spacing="15" HorizontalAlignment="Center">
-                                    <TextBlock Text="🚪"
-                                               FontSize="24"
-                                               VerticalAlignment="Center" />
-                                    <TextBlock Text="Exit Game"
-                                               FontSize="20"
+                                           Foreground="#ffffff" />
+                                <Separator Background="#21262d" Height="2" />
+                                <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="12">
+                                    <TextBlock Grid.Row="0" Grid.Column="0"
+                                               Text="Version:"
+                                               FontSize="18"
+                                               Foreground="#8b949e" />
+                                    <TextBlock Grid.Row="0" Grid.Column="1"
+                                               Text="1.0.0"
+                                               FontSize="18"
                                                FontWeight="Bold"
-                                               Foreground="#ffffff"
-                                               VerticalAlignment="Center" />
+                                               Foreground="#58a6ff" />
+
+                                    <TextBlock Grid.Row="1" Grid.Column="0"
+                                               Text="Created by:"
+                                               FontSize="18"
+                                               Foreground="#8b949e" />
+                                    <TextBlock Grid.Row="1" Grid.Column="1"
+                                               Text="Nico"
+                                               FontSize="18"
+                                               FontWeight="Bold"
+                                               Foreground="#58a6ff" />
+
+                                    <TextBlock Grid.Row="2" Grid.Column="0"
+                                               Text="Year:"
+                                               FontSize="18"
+                                               Foreground="#8b949e" />
+                                    <TextBlock Grid.Row="2" Grid.Column="1"
+                                               Text="2025"
+                                               FontSize="18"
+                                               FontWeight="Bold"
+                                               Foreground="#58a6ff" />
+                                </Grid>
+                            </StackPanel>
+
+                            <!-- Controls -->
+                            <StackPanel Spacing="15">
+                                <TextBlock Text="🎮 Controls"
+                                           FontSize="24"
+                                           FontWeight="Bold"
+                                           Foreground="#ffffff" />
+                                <Separator Background="#21262d" Height="2" />
+                                <StackPanel Spacing="10">
+                                    <Border Background="#0d1117"
+                                            CornerRadius="8"
+                                            Padding="15"
+                                            BorderBrush="#30363d"
+                                            BorderThickness="1">
+                                        <TextBlock TextWrapping="Wrap"
+                                                   FontSize="16"
+                                                   Foreground="#8b949e">
+                                            <Run Text="• Click on upgrade buttons to purchase them"
+                                                 FontWeight="SemiBold"
+                                                 Foreground="#ffffff" />
+                                            <LineBreak />
+                                            <Run Text="• Cash is earned automatically every second" /><LineBreak />
+                                            <Run Text="• Switch between tabs to access different features" />
+                                        </TextBlock>
+                                    </Border>
                                 </StackPanel>
-                            </Button>
-                        </StackPanel>
+                            </StackPanel>
+
+                            <!-- Actions -->
+                            <StackPanel Spacing="15">
+                                <TextBlock Text="🔧 Actions"
+                                           FontSize="24"
+                                           FontWeight="Bold"
+                                           Foreground="#ffffff" />
+                                <Separator Background="#21262d" Height="2" />
+                                <Button Name="BtnExit"
+                                        Click="OnExitGame"
+                                        HorizontalAlignment="Stretch"
+                                        Background="#0d1117"
+                                        BorderBrush="#f85149"
+                                        BorderThickness="2"
+                                        CornerRadius="10"
+                                        Padding="20"
+                                        Cursor="Hand">
+                                    <Button.Styles>
+                                        <Style Selector="Button:pointerover /template/ ContentPresenter">
+                                            <Setter Property="Background" Value="#f85149" />
+                                        </Style>
+                                        <Style Selector="Button:pointerover">
+                                            <Setter Property="BorderBrush" Value="#ff7b72" />
+                                        </Style>
+                                        <Style Selector="Button:pressed /template/ ContentPresenter">
+                                            <Setter Property="Background" Value="#da3633" />
+                                        </Style>
+                                    </Button.Styles>
+                                    <StackPanel Orientation="Horizontal" Spacing="15" HorizontalAlignment="Center">
+                                        <TextBlock Text="🚪"
+                                                   FontSize="24"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Text="Exit Game"
+                                                   FontSize="20"
+                                                   FontWeight="Bold"
+                                                   Foreground="#ffffff"
+                                                   VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
                 </Border>
